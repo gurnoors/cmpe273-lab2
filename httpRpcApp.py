@@ -11,6 +11,11 @@ from spyne.protocol.http import HttpRpc
 from spyne.protocol.json import JsonDocument
 from spyne.server.wsgi import WsgiApplication
 
+#from collections import Counter
+#dict  -> key,val
+
+#The below func will return top 3 vals
+# top3List = Counter(dict).most_common(3)
 
 app = Flask(__name__)
 
@@ -105,7 +110,7 @@ class HelloWorldService(ServiceBase):
             for street in streets:
                 street = re.sub('\d* +block ?o?f?', "", street, flags=re.IGNORECASE)
                 # street = re.sub('block of', "", street, flags=re.IGNORECASE)
-                # street = re.sub('block', "", street, flags=re.IGNORECASE)
+                street = re.sub('(block)*', "", street, flags=re.IGNORECASE)
                 street = street.strip()
                 if street in topStreets:
                     topStreets[street] += 1
